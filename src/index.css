@@ -1,4 +1,12 @@
-@import-normalize; /* bring in normalize.css styles */
+@import-normalize;
+/* bring in normalize.css styles */
+
+* {
+  --text-color: #ffffff;
+  --font-family-barlow: 'Barlow Condensed', sans-serif;
+  --font-family-monda: 'Monda', sans-serif;
+  --font-family-raleway: 'Raleway', sans-serif;
+}
 
 body {
   margin: 0;
@@ -12,4 +20,8 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+img {
+  display: block;
 }
