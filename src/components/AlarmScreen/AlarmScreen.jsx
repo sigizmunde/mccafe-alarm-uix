@@ -1,5 +1,5 @@
 import RoundClock from 'components/RoundClock/RoundClock';
-import React, { useRef } from 'react';
+import React from 'react';
 import {
   CarouselProvider,
   Slider,
@@ -155,7 +155,8 @@ const MyWithStore = WithStore(ComponentToGetCarouselProps, state => ({
 }));
 
 const AlarmScreen = () => {
-  const [alarmTime, setAlarmTime] = useState(new Date());
+  const [alarmTime] = useState(new Date());
+  // , setAlarmTime
   const [items, setItems] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(
     localStorage.getItem('coffeeIndex') || 0
