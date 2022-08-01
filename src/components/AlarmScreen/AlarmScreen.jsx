@@ -1,6 +1,21 @@
 import RoundClock from 'components/RoundClock/RoundClock';
 import React from 'react';
 import {
+  Container,
+  MenuHeader,
+  Main,
+  Caption,
+  Digits,
+  ClockBlock,
+  ClockContainer,
+  CircleDiv,
+  CoffeeImg,
+  prevButtonStyle,
+  nextButtonStyle,
+  sliderStyle,
+  slideStyle,
+} from './AlarmScreen.styled';
+import {
   CarouselProvider,
   Slider,
   Slide,
@@ -9,129 +24,9 @@ import {
   WithStore,
 } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
+import { useSwipeable } from 'react-swipeable';
 import { useEffect, useState } from 'react';
 import { fetchDrinks } from 'services/api-mockup';
-
-import styled from 'styled-components';
-
-const Container = styled.div`
-  width: 100%;
-  max-width: 480px;
-  height: 100%;
-  color: var(--text-color);
-  /* background: rgb(195, 34, 34); */
-  background: linear-gradient(
-    28deg,
-    rgba(195, 34, 34, 1) 0%,
-    rgba(255, 87, 115, 1) 55%,
-    rgba(247, 214, 92, 1) 100%
-  );
-`;
-
-const MenuHeader = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 24px;
-  height: 127px;
-  background: transparent;
-`;
-
-const Main = styled.main`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Caption = styled.p`
-  margin: 0;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.2;
-`;
-
-const Digits = styled.span`
-  font-family: var(--font-family-monda);
-  font-style: normal;
-  font-weight: 400;
-  font-size: 72px;
-  line-height: 1;
-`;
-
-const ClockBlock = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ClockContainer = styled.div`
-  position: absolute;
-  z-index: 1;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-`;
-
-const CircleDiv = styled.div`
-  margin: 42px auto;
-  width: 360px;
-  height: 360px;
-  border-radius: 50%;
-  background-color: #190e08;
-`;
-
-const CoffeeImg = styled.img`
-  display: block;
-  margin: 0 auto;
-  width: 92%;
-`;
-
-const prevButtonStyle = {
-  position: 'absolute',
-  zIndex: 1,
-  left: '0',
-  top: '50%',
-  transform: 'translateY(-50%)',
-  backgroundColor: 'transparent',
-  color: 'var(--text-color)',
-  fontFamily: 'var(--font-family-monda)',
-  fontSize: '42px',
-  border: 'none',
-};
-
-const nextButtonStyle = {
-  position: 'absolute',
-  zIndex: 1,
-  right: '0',
-  top: '50%',
-  transform: 'translateY(-50%)',
-  backgroundColor: 'transparent',
-  color: 'var(--text-color)',
-  fontFamily: 'var(--font-family-monda)',
-  fontSize: '42px',
-  border: 'none',
-};
-
-const sliderStyle = {
-  width: '360px',
-  height: '360px',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  margin: '0 auto',
-};
-
-const slideStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: '100%',
-  margin: '0',
-};
 
 class ComponentToGetCarouselProps extends React.Component {
   // constructor(props) {
@@ -154,9 +49,27 @@ const MyWithStore = WithStore(ComponentToGetCarouselProps, state => ({
   currentSlide: state.currentSlide,
 }));
 
+const timeStringToDate = (hours, minutes) => {
+  const today = new Date();
+  const modifiedDate = new Date(today.setHours(hours, minutes));
+  return modifiedDate;
+};
+
+const swipeConfig = {
+  delta: 10, // min distance(px) before a swipe starts. *See Notes*
+  preventScrollOnSwipe: true, // prevents scroll during swipe (*See Details*)
+  trackTouch: true, // track touch input
+  trackMouse: true, // track mouse input
+  rotationAngle: 0, // set a rotation angle
+  swipeDuration: Infinity, // allowable duration of a swipe (ms). *See Notes*
+  touchEventOptions: { passive: true }, // options for touch listeners (*See Details*)
+};
+
 const AlarmScreen = () => {
-  const [alarmTime] = useState(new Date());
-  // , setAlarmTime
+  const [alarmTimeHours, setAlarmTimeHours] = useState(new Date().getHours());
+  const [alarmTimeMinutes, setAlarmTimeMinutes] = useState(
+    new Date().getMinutes()
+  );
   const [items, setItems] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(
     localStorage.getItem('coffeeIndex') || 0
@@ -171,6 +84,34 @@ const AlarmScreen = () => {
     console.log(x);
   };
 
+  const swipeHandlersHours = useSwipeable({
+    onSwiping: eventData => {
+      const step = 25;
+      const { deltaY } = eventData;
+
+      setAlarmTimeHours(Hours => {
+        let newHours = (Hours - Math.floor(deltaY / step)) % 24;
+        newHours = newHours > 0 ? newHours : 0;
+        return newHours;
+      });
+    },
+    ...swipeConfig,
+  });
+
+  const swipeHandlersMinutes = useSwipeable({
+    onSwiping: eventData => {
+      const step = 25;
+      const { deltaY } = eventData;
+
+      setAlarmTimeMinutes(Minutes => {
+        let newMinutes = (Minutes - Math.floor(deltaY / step)) % 60;
+        newMinutes = newMinutes > 0 ? newMinutes : 0;
+        return newMinutes;
+      });
+    },
+    ...swipeConfig,
+  });
+
   return (
     <Container>
       <MenuHeader></MenuHeader>
@@ -183,7 +124,9 @@ const AlarmScreen = () => {
         )}
         <ClockBlock>
           <ClockContainer>
-            <RoundClock value={alarmTime} />
+            <RoundClock
+              value={timeStringToDate(alarmTimeHours, alarmTimeMinutes)}
+            />
           </ClockContainer>
           {items.length === 0 && <CircleDiv />}
 
@@ -213,9 +156,13 @@ const AlarmScreen = () => {
         </ClockBlock>
         <Caption>Coffee time:</Caption>
         <Digits>
-          {alarmTime.getHours().toString().padStart(2, '0') +
-            ':' +
-            alarmTime.getMinutes().toString().padStart(2, '0')}
+          <span {...swipeHandlersHours}>
+            {alarmTimeHours.toString().padStart(2, '0')}
+          </span>
+          :
+          <span {...swipeHandlersMinutes}>
+            {alarmTimeMinutes.toString().padStart(2, '0')}
+          </span>
         </Digits>
       </Main>
     </Container>
