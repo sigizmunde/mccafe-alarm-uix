@@ -141,8 +141,8 @@ class ComponentToGetCarouselProps extends React.Component {
   componentDidUpdate() {
     console.log(this.props);
     const x = this.props.currentSlide;
-    if (this.props.updateIndex && x) this.props.updateIndex(x);
-    if (x) localStorage.setItem('coffeeIndex', x);
+    if (this.props.updateIndex && x > -1) this.props.updateIndex(x);
+    if (x > -1) localStorage.setItem('coffeeIndex', x);
   }
 
   render() {
@@ -167,7 +167,6 @@ const AlarmScreen = () => {
   }, []);
 
   const writeCurrentRef = x => {
-    // currentIndex.current = x;
     setCurrentIndex(x);
     console.log(x);
   };
