@@ -65,6 +65,11 @@ const swipeConfig = {
   touchEventOptions: { passive: true }, // options for touch listeners (*See Details*)
 };
 
+let swipeBuffer;
+const swipeStep = 25;
+
+//------------------------------ functional component -----------------------------
+
 const AlarmScreen = () => {
   const [alarmTimeHours, setAlarmTimeHours] = useState(new Date().getHours());
   const [alarmTimeMinutes, setAlarmTimeMinutes] = useState(
@@ -86,28 +91,33 @@ const AlarmScreen = () => {
 
   const swipeHandlersHours = useSwipeable({
     onSwiping: eventData => {
-      const step = 25;
       const { deltaY } = eventData;
-
-      setAlarmTimeHours(Hours => {
-        let newHours = (Hours - Math.floor(deltaY / step)) % 24;
-        newHours = newHours > 0 ? newHours : 0;
-        return newHours;
-      });
+      let newHours = (swipeBuffer - Math.floor(deltaY / swipeStep)) % 24;
+      while (newHours < 0) {
+        newHours += 24;
+      }
+      setAlarmTimeHours(newHours);
+    },
+    onSwipeStart: eventData => {
+      swipeBuffer = alarmTimeHours;
+    },
+    onTap: () => {
+      setAlarmTimeHours(hours => (hours + 1) % 24);
     },
     ...swipeConfig,
   });
 
   const swipeHandlersMinutes = useSwipeable({
     onSwiping: eventData => {
-      const step = 25;
       const { deltaY } = eventData;
-
-      setAlarmTimeMinutes(Minutes => {
-        let newMinutes = (Minutes - Math.floor(deltaY / step)) % 60;
-        newMinutes = newMinutes > 0 ? newMinutes : 0;
-        return newMinutes;
-      });
+      let newMinutes = (swipeBuffer - Math.floor(deltaY / swipeStep)) % 60;
+      while (newMinutes < 0) {
+        newMinutes += 60;
+      }
+      setAlarmTimeMinutes(newMinutes);
+    },
+    onSwipeStart: eventData => {
+      swipeBuffer = alarmTimeMinutes;
     },
     ...swipeConfig,
   });
