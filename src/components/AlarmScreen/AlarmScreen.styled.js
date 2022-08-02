@@ -23,6 +23,16 @@ export const MenuHeader = styled.header`
   background: transparent;
 `;
 
+export const BackBtn = styled.div`
+  font-family: var(--font-family-monda);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 42px;
+  cursor: pointer;
+  padding: 15px;
+  margin: 0;
+`;
+
 export const Main = styled.main`
   display: flex;
   flex-direction: column;
@@ -36,14 +46,6 @@ export const Caption = styled.p`
   font-weight: 400;
   font-size: 18px;
   line-height: 1.2;
-`;
-
-export const Digits = styled.span`
-  font-family: var(--font-family-monda);
-  font-style: normal;
-  font-weight: 400;
-  font-size: 72px;
-  line-height: 1;
 `;
 
 export const ClockBlock = styled.div`
@@ -87,6 +89,7 @@ export const prevButtonStyle = {
   fontFamily: 'var(--font-family-monda)',
   fontSize: '42px',
   border: 'none',
+  outline: 'none',
 };
 
 export const nextButtonStyle = {
@@ -100,6 +103,7 @@ export const nextButtonStyle = {
   fontFamily: 'var(--font-family-monda)',
   fontSize: '42px',
   border: 'none',
+  outline: 'none',
 };
 
 export const sliderStyle = {

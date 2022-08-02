@@ -5,7 +5,6 @@ import {
   MenuHeader,
   Main,
   Caption,
-  Digits,
   ClockBlock,
   ClockContainer,
   CircleDiv,
@@ -14,6 +13,7 @@ import {
   nextButtonStyle,
   sliderStyle,
   slideStyle,
+  BackBtn,
 } from './AlarmScreen.styled';
 import {
   CarouselProvider,
@@ -24,9 +24,10 @@ import {
   WithStore,
 } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
-import { useSwipeable } from 'react-swipeable';
 import { useEffect, useState } from 'react';
 import { fetchDrinks } from 'services/api-mockup';
+import ClockSwiper from 'components/ClockSwiper/ClockSwiper';
+import ModalWindow from 'components/ModalWindow/ModalWindow';
 
 class ComponentToGetCarouselProps extends React.Component {
   // constructor(props) {
@@ -55,22 +56,10 @@ const timeStringToDate = (hours, minutes) => {
   return modifiedDate;
 };
 
-const swipeConfig = {
-  delta: 10, // min distance(px) before a swipe starts. *See Notes*
-  preventScrollOnSwipe: true, // prevents scroll during swipe (*See Details*)
-  trackTouch: true, // track touch input
-  trackMouse: true, // track mouse input
-  rotationAngle: 0, // set a rotation angle
-  swipeDuration: Infinity, // allowable duration of a swipe (ms). *See Notes*
-  touchEventOptions: { passive: true }, // options for touch listeners (*See Details*)
-};
-
-let swipeBuffer;
-const swipeStep = 25;
-
 //------------------------------ functional component -----------------------------
 
-const AlarmScreen = () => {
+const AlarmScreen = ({ openFullscreen, closeFullscreen }) => {
+  const [fullscreen, setFullscreen] = useState(false);
   const [alarmTimeHours, setAlarmTimeHours] = useState(new Date().getHours());
   const [alarmTimeMinutes, setAlarmTimeMinutes] = useState(
     new Date().getMinutes()
@@ -79,6 +68,16 @@ const AlarmScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(
     localStorage.getItem('coffeeIndex') || 0
   );
+
+  const goFullscreen = () => {
+    openFullscreen();
+    setFullscreen(true);
+  };
+
+  const goWindowed = () => {
+    closeFullscreen();
+    setFullscreen(false);
+  };
 
   useEffect(() => {
     fetchDrinks().then(response => setItems(response));
@@ -89,39 +88,12 @@ const AlarmScreen = () => {
     console.log(x);
   };
 
-  const swipeHandlersHours = useSwipeable({
-    onSwiping: eventData => {
-      const { deltaY } = eventData;
-      let newHours = (swipeBuffer - Math.floor(deltaY / swipeStep)) % 24;
-      while (newHours < 0) {
-        newHours += 24;
-      }
-      setAlarmTimeHours(newHours);
-    },
-    onSwipeStart: eventData => {
-      swipeBuffer = alarmTimeHours;
-    },
-    ...swipeConfig,
-  });
-
-  const swipeHandlersMinutes = useSwipeable({
-    onSwiping: eventData => {
-      const { deltaY } = eventData;
-      let newMinutes = (swipeBuffer - Math.floor(deltaY / swipeStep)) % 60;
-      while (newMinutes < 0) {
-        newMinutes += 60;
-      }
-      setAlarmTimeMinutes(newMinutes);
-    },
-    onSwipeStart: eventData => {
-      swipeBuffer = alarmTimeMinutes;
-    },
-    ...swipeConfig,
-  });
-
   return (
     <Container>
-      <MenuHeader></MenuHeader>
+      {!fullscreen && <ModalWindow handleClick={goFullscreen} />}
+      <MenuHeader>
+        <BackBtn onClick={goWindowed}>exit</BackBtn>
+      </MenuHeader>
       <Main>
         {items.length > 0 && (
           <>
@@ -162,15 +134,12 @@ const AlarmScreen = () => {
           )}
         </ClockBlock>
         <Caption>Coffee time:</Caption>
-        <Digits>
-          <span {...swipeHandlersHours}>
-            {alarmTimeHours.toString().padStart(2, '0')}
-          </span>
-          :
-          <span {...swipeHandlersMinutes}>
-            {alarmTimeMinutes.toString().padStart(2, '0')}
-          </span>
-        </Digits>
+        <ClockSwiper
+          Hours={alarmTimeHours}
+          Minutes={alarmTimeMinutes}
+          setHours={setAlarmTimeHours}
+          setMinutes={setAlarmTimeMinutes}
+        />
       </Main>
     </Container>
   );
