@@ -31,6 +31,7 @@ const Modal = styled.div`
     rgba(255, 87, 115, 1) 55%,
     rgba(247, 214, 92, 1) 100%
   );
+  border-radius: 25px;
 `;
 
 const ModalWindow = ({ handleClick }) => {

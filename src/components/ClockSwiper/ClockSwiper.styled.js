@@ -13,6 +13,7 @@ export const SwipeZone = styled.span`
   position: relative;
   margin-top: 15px;
   margin-bottom: 15px;
+  cursor: ns-resize;
   ::before {
     content: '▲';
     font-size: 12px;
