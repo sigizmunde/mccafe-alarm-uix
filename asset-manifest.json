@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/mccafe-alarm-uix/static/css/main.856be0c8.css",
-    "main.js": "/mccafe-alarm-uix/static/js/main.72489dcc.js",
+    "main.css": "/mccafe-alarm-uix/static/css/main.0f38d523.css",
+    "main.js": "/mccafe-alarm-uix/static/js/main.f97729ca.js",
     "static/media/caramel_cappucino.png": "/mccafe-alarm-uix/static/media/caramel_cappucino.48633ce9e752ceb71300.png",
     "static/media/ice_latte.png": "/mccafe-alarm-uix/static/media/ice_latte.036fddade37876805031.png",
     "static/media/hot_chocolate.png": "/mccafe-alarm-uix/static/media/hot_chocolate.ade58a6592cb7858a460.png",
@@ -10,12 +10,13 @@
     "static/media/cappucino.png": "/mccafe-alarm-uix/static/media/cappucino.ac9ed449c1f414ec8f54.png",
     "static/media/americano.png": "/mccafe-alarm-uix/static/media/americano.80ef104f4fc3ace0b62d.png",
     "static/media/premium_roast.png": "/mccafe-alarm-uix/static/media/premium_roast.796ee24f040a42173076.png",
+    "static/media/symbol-defs.svg": "/mccafe-alarm-uix/static/media/symbol-defs.cfcd05c4192d46cf363f32f5965eb4f6.svg",
     "index.html": "/mccafe-alarm-uix/index.html",
-    "main.856be0c8.css.map": "/mccafe-alarm-uix/static/css/main.856be0c8.css.map",
-    "main.72489dcc.js.map": "/mccafe-alarm-uix/static/js/main.72489dcc.js.map"
+    "main.0f38d523.css.map": "/mccafe-alarm-uix/static/css/main.0f38d523.css.map",
+    "main.f97729ca.js.map": "/mccafe-alarm-uix/static/js/main.f97729ca.js.map"
   },
   "entrypoints": [
-    "static/css/main.856be0c8.css",
-    "static/js/main.72489dcc.js"
+    "static/css/main.0f38d523.css",
+    "static/js/main.f97729ca.js"
   ]
 }
