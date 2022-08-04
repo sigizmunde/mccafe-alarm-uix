@@ -24,12 +24,13 @@ const Modal = styled.div`
   justify-content: center;
   align-items: center;
   gap: 25px;
-  background-color: rgb(195, 34, 34);
+  background-color: #4e2417;
   background: linear-gradient(
     28deg,
-    rgba(195, 34, 34, 1) 0%,
-    rgba(255, 87, 115, 1) 55%,
-    rgba(247, 214, 92, 1) 100%
+    #3a1a0f 0%,
+    #4e2417 50%,
+    #d15525 75%,
+    #fbb949 100%
   );
   border-radius: 25px;
 `;

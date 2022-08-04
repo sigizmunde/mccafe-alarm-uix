@@ -3,6 +3,8 @@
 
 * {
   --text-color: #ffffff;
+  --faded-text-color: #fbb949;
+  --inverted-text-color: #4e2417;
   --font-family-barlow: 'Barlow Condensed', sans-serif;
   --font-family-monda: 'Monda', sans-serif;
   --font-family-raleway: 'Raleway', sans-serif;
