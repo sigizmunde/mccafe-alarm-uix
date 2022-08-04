@@ -5,12 +5,13 @@ export const Container = styled.div`
   max-width: 480px;
   height: 100%;
   color: var(--text-color);
-  background: rgb(195, 34, 34);
+  background: #4e2417;
   background: linear-gradient(
     28deg,
-    rgba(195, 34, 34, 1) 0%,
-    rgba(255, 87, 115, 1) 55%,
-    rgba(247, 214, 92, 1) 100%
+    #3a1a0f 0%,
+    #4e2417 50%,
+    #d15525 75%,
+    #fbb949 100%
   );
 `;
 
@@ -44,8 +45,8 @@ export const Caption = styled.p`
   margin: 0;
   font-style: normal;
   font-weight: 400;
-  font-size: 18px;
-  line-height: 1.2;
+  font-size: 24px;
+  line-height: 1.4;
 `;
 
 export const ClockBlock = styled.div`
@@ -84,10 +85,11 @@ export const prevButtonStyle = {
   left: '0',
   top: '50%',
   transform: 'translateY(-50%)',
+  padding: '10px',
   backgroundColor: 'transparent',
-  color: 'var(--text-color)',
+  color: 'var(--faded-text-color)',
   fontFamily: 'var(--font-family-monda)',
-  fontSize: '42px',
+  fontSize: '24px',
   border: 'none',
   outline: 'none',
 };
@@ -98,10 +100,11 @@ export const nextButtonStyle = {
   right: '0',
   top: '50%',
   transform: 'translateY(-50%)',
+  padding: '10px',
   backgroundColor: 'transparent',
-  color: 'var(--text-color)',
+  color: 'var(--faded-text-color)',
   fontFamily: 'var(--font-family-monda)',
-  fontSize: '42px',
+  fontSize: '24px',
   border: 'none',
   outline: 'none',
 };

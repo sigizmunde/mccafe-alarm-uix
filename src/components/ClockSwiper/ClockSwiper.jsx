@@ -51,7 +51,7 @@ const ClockSwiper = ({ Hours, Minutes, setHours, setMinutes }) => {
         {Hours.toString().padStart(2, '0')}
       </SwipeZone>
       :
-      <SwipeZone {...swipeHandlersMinutes}>
+      <SwipeZone {...swipeHandlersMinutes} right>
         {Minutes.toString().padStart(2, '0')}
       </SwipeZone>
     </Digits>

@@ -1,5 +1,7 @@
 import RoundClock from 'components/RoundClock/RoundClock';
 import React from 'react';
+import { Svg, Svg180 } from 'components/StyledBlocks/StyledBlocks';
+import Calendar from 'components/Calendar/Calendar';
 import {
   Container,
   MenuHeader,
@@ -28,6 +30,7 @@ import { useEffect, useState } from 'react';
 import { fetchDrinks } from 'services/api-mockup';
 import ClockSwiper from 'components/ClockSwiper/ClockSwiper';
 import ModalWindow from 'components/ModalWindow/ModalWindow';
+import Icons from 'images/symbol-defs.svg';
 
 class ComponentToGetCarouselProps extends React.Component {
   // constructor(props) {
@@ -92,13 +95,19 @@ const AlarmScreen = ({ openFullscreen, closeFullscreen }) => {
     <Container>
       {!fullscreen && <ModalWindow handleClick={goFullscreen} />}
       <MenuHeader>
-        <BackBtn onClick={goWindowed}>exit</BackBtn>
+        <BackBtn onClick={goWindowed}>
+          <Svg>
+            <use href={Icons + '#icon-dots-three-horizontal'} />
+          </Svg>
+        </BackBtn>
       </MenuHeader>
       <Main>
         {items.length > 0 && (
           <>
-            <Caption>Your drink is</Caption>
-            <Caption>{items[currentIndex]?.name}</Caption>
+            <Caption>Wake me up with</Caption>
+            <Caption>
+              <b>{items[currentIndex]?.name}</b>
+            </Caption>
           </>
         )}
         <ClockBlock>
@@ -118,7 +127,11 @@ const AlarmScreen = ({ openFullscreen, closeFullscreen }) => {
               infinite={true}
               isIntrinsicHeight={true}
             >
-              <ButtonBack style={prevButtonStyle}>{'<'}</ButtonBack>
+              <ButtonBack style={prevButtonStyle}>
+                <Svg180>
+                  <use href={Icons + '#icon-controller-play'} />
+                </Svg180>
+              </ButtonBack>
               <Slider style={sliderStyle}>
                 {items.map(({ id, img_src, name }, index) => {
                   return (
@@ -128,18 +141,22 @@ const AlarmScreen = ({ openFullscreen, closeFullscreen }) => {
                   );
                 })}
               </Slider>
-              <ButtonNext style={nextButtonStyle}>{'>'}</ButtonNext>
+              <ButtonNext style={nextButtonStyle}>
+                <Svg>
+                  <use href={Icons + '#icon-controller-play'} />
+                </Svg>
+              </ButtonNext>
               <MyWithStore updateIndex={writeCurrentRef} />
             </CarouselProvider>
           )}
         </ClockBlock>
-        <Caption>Coffee time:</Caption>
         <ClockSwiper
           Hours={alarmTimeHours}
           Minutes={alarmTimeMinutes}
           setHours={setAlarmTimeHours}
           setMinutes={setAlarmTimeMinutes}
         />
+        <Calendar />
       </Main>
     </Container>
   );

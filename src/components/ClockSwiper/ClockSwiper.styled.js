@@ -11,23 +11,23 @@ export const Digits = styled.span`
 export const SwipeZone = styled.span`
   display: inline-block;
   position: relative;
-  margin-top: 15px;
-  margin-bottom: 15px;
   cursor: ns-resize;
   ::before {
     content: '▲';
     font-size: 12px;
     position: absolute;
-    top: -5px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 50%;
+    ${p => (p.right ? 'right: -15px' : 'left: -15px')};
+    transform: translateY(calc(-50% - 4px));
+    color: var(--faded-text-color);
   }
   ::after {
     content: '▼';
     font-size: 12px;
     position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 50%;
+    ${p => (p.right ? 'right: -15px' : 'left: -15px')};
+    transform: translateY(calc(-50% + 12px));
+    color: var(--faded-text-color);
   }
 `;
