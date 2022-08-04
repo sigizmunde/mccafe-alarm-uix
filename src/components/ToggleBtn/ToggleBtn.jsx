@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 const SmallBtn = styled(Btn)`
+  box-sizing: content-box;
   font-size: 15px;
   line-height: 24px;
   text-align: center;

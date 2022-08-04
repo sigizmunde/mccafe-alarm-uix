@@ -2,6 +2,8 @@
 /* bring in normalize.css styles */
 
 * {
+  box-sizing: border-box;
+
   --text-color: #ffffff;
   --faded-text-color: #fbb949;
   --inverted-text-color: #4e2417;

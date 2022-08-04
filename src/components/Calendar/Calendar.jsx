@@ -5,7 +5,7 @@ const Week = styled.div`
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin: 42px auto;
+  margin: 24px auto 36px;
 `;
 
 const Calendar = () => {

@@ -1,4 +1,6 @@
+import { Btn, Svg } from 'components/StyledBlocks/StyledBlocks';
 import styled from 'styled-components';
+import McCafeLogo from 'images/McCafeLogo.svg';
 
 const Backdrop = styled.div`
   position: fixed;
@@ -9,20 +11,24 @@ const Backdrop = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #00000080;
 `;
 
 const Modal = styled.div`
   position: absolute;
   z-index: 1;
-  top: 50px;
-  right: 50px;
-  bottom: 50px;
-  left: 50px;
+  height: 100%;
+  width: 100%;
+  max-width: 480px;
+  margin: auto;
+  padding: 25px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   gap: 25px;
   background-color: #4e2417;
   background: linear-gradient(
@@ -35,11 +41,33 @@ const Modal = styled.div`
   border-radius: 25px;
 `;
 
+const Frame = styled.div`
+  border: 1px solid var(--faded-text-color);
+  border-radius: 25px;
+  padding: 0;
+`;
+
 const ModalWindow = ({ handleClick }) => {
   return (
     <Backdrop>
       <Modal onClick={handleClick}>
-        <p>start</p>
+        <Frame>
+          <Btn
+            style={{
+              padding: '10px',
+            }}
+          >
+            <Svg
+              style={{
+                width: '72px',
+                height: '72px',
+                fill: 'var(--text-color)',
+              }}
+            >
+              <use href={McCafeLogo + '#main'} />
+            </Svg>
+          </Btn>
+        </Frame>
       </Modal>
     </Backdrop>
   );
