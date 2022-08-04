@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/mccafe-alarm-uix/static/css/main.43d7b852.css",
-    "main.js": "/mccafe-alarm-uix/static/js/main.6a58f2a0.js",
+    "main.js": "/mccafe-alarm-uix/static/js/main.1a1bb96e.js",
     "static/media/caramel_cappucino.png": "/mccafe-alarm-uix/static/media/caramel_cappucino.48633ce9e752ceb71300.png",
     "static/media/ice_latte.png": "/mccafe-alarm-uix/static/media/ice_latte.036fddade37876805031.png",
     "static/media/hot_chocolate.png": "/mccafe-alarm-uix/static/media/hot_chocolate.ade58a6592cb7858a460.png",
@@ -14,10 +14,10 @@
     "static/media/symbol-defs.svg": "/mccafe-alarm-uix/static/media/symbol-defs.cfcd05c4192d46cf363f32f5965eb4f6.svg",
     "index.html": "/mccafe-alarm-uix/index.html",
     "main.43d7b852.css.map": "/mccafe-alarm-uix/static/css/main.43d7b852.css.map",
-    "main.6a58f2a0.js.map": "/mccafe-alarm-uix/static/js/main.6a58f2a0.js.map"
+    "main.1a1bb96e.js.map": "/mccafe-alarm-uix/static/js/main.1a1bb96e.js.map"
   },
   "entrypoints": [
     "static/css/main.43d7b852.css",
-    "static/js/main.6a58f2a0.js"
+    "static/js/main.1a1bb96e.js"
   ]
 }
