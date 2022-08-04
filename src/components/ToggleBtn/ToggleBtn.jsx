@@ -21,7 +21,9 @@ const ToggleBtn = ({ children }) => {
   return (
     <SmallBtn
       bg={active ? 'var(--text-color)' : 'transparent'}
-      hoverbg="var(--faded-text-color)"
+      hoverbg={
+        active ? 'var(--faded-text-color)' : 'var(--inverted-text-color)'
+      }
       clr={active ? 'var(--inverted-text-color)' : 'var(--text-color)'}
       onClick={toggleActive}
     >

@@ -64,7 +64,7 @@ const timeStringToDate = (hours, minutes) => {
 //------------------------------ functional component -----------------------------
 
 const AlarmScreen = ({ openFullscreen, closeFullscreen }) => {
-  const [fullscreen, setFullscreen] = useState(false);
+  const [modal, setModal] = useState(true);
   const [pay, setPay] = useState(false);
   const [alarmTimeHours, setAlarmTimeHours] = useState(new Date().getHours());
   const [alarmTimeMinutes, setAlarmTimeMinutes] = useState(
@@ -75,14 +75,18 @@ const AlarmScreen = ({ openFullscreen, closeFullscreen }) => {
     localStorage.getItem('coffeeIndex') || 0
   );
 
-  const goFullscreen = () => {
-    openFullscreen();
-    setFullscreen(true);
+  const closeModal = () => {
+    if (window.innerHeight !== '100vh') {
+      openFullscreen();
+    }
+    setModal(false);
   };
 
-  const goWindowed = () => {
-    closeFullscreen();
-    setFullscreen(false);
+  const openModal = () => {
+    if (window.innerHeight !== '100vh') {
+      openFullscreen();
+    }
+    setModal(true);
   };
 
   const goPay = () => {
@@ -104,10 +108,10 @@ const AlarmScreen = ({ openFullscreen, closeFullscreen }) => {
 
   return (
     <Container>
-      {!fullscreen && <ModalWindow handleClick={goFullscreen} />}
+      {modal && <ModalWindow handleClick={closeModal} />}
       {pay && <PayForm handleClick={finishPay} />}
       <MenuHeader>
-        <BackBtn onClick={goWindowed}>
+        <BackBtn onClick={openModal}>
           <Svg>
             <use href={Icons + '#icon-dots-three-horizontal'} />
           </Svg>
